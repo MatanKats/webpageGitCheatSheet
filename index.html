@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Git & GitHub Cheatsheet</title>
+  <meta name="description" content="A comprehensive, interactive Git and GitHub cheatsheet with commands, explanations, and examples for every workflow." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header>
+  <div class="header-inner">
+    <a class="logo" href="#">
+      <div class="logo-icon">⎇</div>
+      <div class="logo-text">
+        <h1>Git Cheatsheet</h1>
+        <span>Quick Reference Guide</span>
+      </div>
+    </a>
+    <div class="search-wrapper">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Search commands, descriptions…" autocomplete="off" />
+    </div>
+    <div class="header-meta">
+      <span class="badge">Git 2.x</span>
+    </div>
+  </div>
+</header>
+
+<!-- ── LAYOUT ── -->
+<div class="layout">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar">
+    <nav>
+      <div class="sidebar-label">Sections</div>
+      <a class="nav-link s0" href="#installation"><span class="nav-dot s0"></span>Installation &amp; GUIs</a>
+      <a class="nav-link s1" href="#setup"><span class="nav-dot s1"></span>Setup</a>
+      <a class="nav-link s2" href="#setup-init"><span class="nav-dot s2"></span>Setup &amp; Init</a>
+      <a class="nav-link s3" href="#stage-snapshot"><span class="nav-dot s3"></span>Stage &amp; Snapshot</a>
+      <a class="nav-link s4" href="#branch-merge"><span class="nav-dot s4"></span>Branch &amp; Merge</a>
+      <a class="nav-link s5" href="#inspect-compare"><span class="nav-dot s5"></span>Inspect &amp; Compare</a>
+      <a class="nav-link s6" href="#share-update"><span class="nav-dot s6"></span>Share &amp; Update</a>
+      <a class="nav-link s7" href="#tracking-paths"><span class="nav-dot s7"></span>Tracking Path Changes</a>
+      <a class="nav-link s8" href="#ignoring"><span class="nav-dot s8"></span>Ignoring Patterns</a>
+      <a class="nav-link s9" href="#rewrite-history"><span class="nav-dot s9"></span>Rewrite History</a>
+      <a class="nav-link s10" href="#temp-commits"><span class="nav-dot s10"></span>Temporary Commits</a>
+    </nav>
+  </aside>
+
+  <!-- ── MAIN CONTENT ── -->
+  <main>
+
+    <!-- 1. INSTALLATION & GUIS -->
+    <section class="section s0" id="installation">
+      <div class="section-header">
+        <div class="section-icon">📦</div>
+        <div>
+          <div class="section-title">Installation &amp; GUIs</div>
+          <div class="section-subtitle">Get Git installed and choose your preferred interface</div>
+        </div>
+      </div>
+      <div class="commands-grid">
+        <div class="info-card">
+          <div class="cmd-title">Download Git</div>
+          <div class="cmd-desc">Official Git distributions for all platforms.</div>
+          <ul>
+            <li><strong>Windows:</strong> <a href="https://git-scm.com" target="_blank">git-scm.com</a></li>
+            <li><strong>macOS:</strong> <code>brew install git</code> or Xcode CLI tools</li>
+            <li><strong>Linux (Debian):</strong> <code>sudo apt install git</code></li>
+            <li><strong>Linux (Arch):</strong> <code>sudo pacman -S git</code></li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <div class="cmd-title">GUI Clients</div>
+          <div class="cmd-desc">Graphical tools to manage Git repos visually.</div>
+          <ul>
+            <li><a href="https://desktop.github.com" target="_blank">GitHub Desktop</a> — Simple &amp; free</li>
+            <li><a href="https://www.sourcetreeapp.com" target="_blank">Sourcetree</a> — Feature-rich, free</li>
+            <li><a href="https://gitkraken.com" target="_blank">GitKraken</a> — Beautiful &amp; powerful</li>
+            <li><a href="https://www.syntevo.com/smartgit/" target="_blank">SmartGit</a> — Commercial</li>
+            <li>VSCode built-in Source Control panel</li>
+          </ul>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Verify</div>
+          <div class="cmd-title">Check Git Version</div>
+          <div class="cmd-desc">Confirm that Git is correctly installed on your system.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git --version</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. SETUP -->
+    <section class="section s1" id="setup">
+      <div class="section-header">
+        <div class="section-icon">⚙️</div>
+        <div>
+          <div class="section-title">Setup</div>
+          <div class="section-subtitle">Configure your Git identity and global preferences</div>
+        </div>
+      </div>
+      <div class="commands-grid">
+        <div class="cmd-card">
+          <div class="cmd-label">Identity</div>
+          <div class="cmd-title">Set Username</div>
+          <div class="cmd-desc">Set the name that will be attached to all your commits.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git config --global user.name "Your Name"</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Identity</div>
+          <div class="cmd-title">Set Email</div>
+          <div class="cmd-desc">Set the email address that will be attached to all your commits.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git config --global user.email "you@example.com"</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Preferences</div>
+          <div class="cmd-title">Set Default Editor</div>
+          <div class="cmd-desc">Choose the editor Git opens for commit messages (e.g. VS Code, Vim).</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git config --global core.editor "code --wait"</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Preferences</div>
+          <div class="cmd-title">Set Default Branch Name</div>
+          <div class="cmd-desc">Change the name of the initial branch from <code>master</code> to <code>main</code>.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git config --global init.defaultBranch main</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Review</div>
+          <div class="cmd-title">List All Config</div>
+          <div class="cmd-desc">Show all global Git configuration values currently in effect.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git config --global --list</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Preferences</div>
+          <div class="cmd-title">Enable Color Output</div>
+          <div class="cmd-desc">Turn on colorized output for easier reading in the terminal.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git config --global color.ui auto</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. SETUP & INIT -->
+    <section class="section s2" id="setup-init">
+      <div class="section-header">
+        <div class="section-icon">🚀</div>
+        <div>
+          <div class="section-title">Setup &amp; Init</div>
+          <div class="section-subtitle">Initialize new repositories or clone existing ones</div>
+        </div>
+      </div>
+      <div class="commands-grid">
+        <div class="cmd-card">
+          <div class="cmd-label">Initialize</div>
+          <div class="cmd-title">Create New Repo</div>
+          <div class="cmd-desc">Initialize a new Git repository in the current directory. Creates a hidden <code>.git</code> folder.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git init</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Initialize</div>
+          <div class="cmd-title">Init in Named Folder</div>
+          <div class="cmd-desc">Create a new directory and initialize a Git repository inside it.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git init my-project</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Clone</div>
+          <div class="cmd-title">Clone a Repository</div>
+          <div class="cmd-desc">Copy an existing remote repository to your local machine, including full history.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git clone https://github.com/user/repo.git</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Clone</div>
+          <div class="cmd-title">Clone into Folder</div>
+          <div class="cmd-desc">Clone a repository into a specific local folder name.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git clone https://github.com/user/repo.git my-folder</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Clone</div>
+          <div class="cmd-title">Shallow Clone</div>
+          <div class="cmd-desc">Clone only the most recent commit — much faster for large repositories.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git clone --depth 1 https://github.com/user/repo.git</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. STAGE & SNAPSHOT -->
+    <section class="section s3" id="stage-snapshot">
+      <div class="section-header">
+        <div class="section-icon">📸</div>
+        <div>
+          <div class="section-title">Stage &amp; Snapshot</div>
+          <div class="section-subtitle">Track changes and create commits in your repository</div>
+        </div>
+      </div>
+      <div class="commands-grid">
+        <div class="cmd-card">
+          <div class="cmd-label">Status</div>
+          <div class="cmd-title">Show Working Status</div>
+          <div class="cmd-desc">Show the state of modified, staged, and untracked files in your working directory.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git status</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Stage</div>
+          <div class="cmd-title">Stage a File</div>
+          <div class="cmd-desc">Add a specific file to the staging area so it will be included in the next commit.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git add &lt;filename&gt;</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Stage</div>
+          <div class="cmd-title">Stage All Changes</div>
+          <div class="cmd-desc">Stage all modified and new files in the current directory and subdirectories.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git add .</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Stage</div>
+          <div class="cmd-title">Stage Interactively</div>
+          <div class="cmd-desc">Interactively choose which hunks (portions) of a file to stage — great for partial commits.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git add -p &lt;filename&gt;</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Diff</div>
+          <div class="cmd-title">Show Unstaged Changes</div>
+          <div class="cmd-desc">View the line-by-line diff of what changed in the working directory but hasn't been staged yet.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git diff</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Diff</div>
+          <div class="cmd-title">Show Staged Changes</div>
+          <div class="cmd-desc">View the diff of what is staged and will go into the next commit.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git diff --staged</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Commit</div>
+          <div class="cmd-title">Commit Staged Changes</div>
+          <div class="cmd-desc">Record staged changes into the repository history with a descriptive message.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git commit -m "Your commit message"</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Commit</div>
+          <div class="cmd-title">Stage &amp; Commit</div>
+          <div class="cmd-desc">Automatically stage all tracked modified files and commit in one step.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git commit -am "Your commit message"</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Unstage</div>
+          <div class="cmd-title">Unstage a File</div>
+          <div class="cmd-desc">Remove a file from the staging area while keeping your working directory changes.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git restore --staged &lt;filename&gt;</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Discard</div>
+          <div class="cmd-title">Discard Working Changes</div>
+          <div class="cmd-desc">Discard all unstaged changes in a file, reverting it to the last committed state.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git restore &lt;filename&gt;</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. BRANCH & MERGE -->
+    <section class="section s4" id="branch-merge">
+      <div class="section-header">
+        <div class="section-icon">🌿</div>
+        <div>
+          <div class="section-title">Branch &amp; Merge</div>
+          <div class="section-subtitle">Isolate work and integrate changes between branches</div>
+        </div>
+      </div>
+      <div class="commands-grid">
+        <div class="cmd-card">
+          <div class="cmd-label">List</div>
+          <div class="cmd-title">List Branches</div>
+          <div class="cmd-desc">Show all local branches. The current branch is highlighted with an asterisk.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git branch</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">List</div>
+          <div class="cmd-title">List All Branches</div>
+          <div class="cmd-desc">Show local and remote-tracking branches together.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git branch -a</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Create</div>
+          <div class="cmd-title">Create a Branch</div>
+          <div class="cmd-desc">Create a new branch pointing at the current commit without switching to it.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git branch &lt;branch-name&gt;</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Switch</div>
+          <div class="cmd-title">Switch to Branch</div>
+          <div class="cmd-desc">Switch your working directory to another branch.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git switch &lt;branch-name&gt;</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Create &amp; Switch</div>
+          <div class="cmd-title">Create &amp; Checkout Branch</div>
+          <div class="cmd-desc">Create a new branch and immediately switch to it in one command.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git switch -c &lt;branch-name&gt;</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Merge</div>
+          <div class="cmd-title">Merge a Branch</div>
+          <div class="cmd-desc">Merge the specified branch into the current branch, creating a merge commit if needed.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git merge &lt;branch-name&gt;</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Merge</div>
+          <div class="cmd-title">Merge — No Fast Forward</div>
+          <div class="cmd-desc">Force a merge commit even when a fast-forward is possible, preserving branch history.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git merge --no-ff &lt;branch-name&gt;</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Delete</div>
+          <div class="cmd-title">Delete a Branch</div>
+          <div class="cmd-desc">Delete a branch that has already been merged. Use <code>-D</code> to force-delete unmerged branches.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git branch -d &lt;branch-name&gt;</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. INSPECT & COMPARE -->
+    <section class="section s5" id="inspect-compare">
+      <div class="section-header">
+        <div class="section-icon">🔎</div>
+        <div>
+          <div class="section-title">Inspect &amp; Compare</div>
+          <div class="section-subtitle">Examine logs, diffs, and repository history</div>
+        </div>
+      </div>
+      <div class="commands-grid">
+        <div class="cmd-card">
+          <div class="cmd-label">Log</div>
+          <div class="cmd-title">Show Commit Log</div>
+          <div class="cmd-desc">Display the full commit history with author, date, and message for the current branch.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git log</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Log</div>
+          <div class="cmd-title">Compact Log</div>
+          <div class="cmd-desc">Show an abbreviated one-line-per-commit history — great for a quick overview.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git log --oneline --graph --all</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Log</div>
+          <div class="cmd-title">Log by Author</div>
+          <div class="cmd-desc">Filter commit history to show only commits from a specific author.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git log --author="Name"</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Diff</div>
+          <div class="cmd-title">Diff Between Branches</div>
+          <div class="cmd-desc">Show what has changed between two branches.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git diff main..feature-branch</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Show</div>
+          <div class="cmd-title">Show a Commit</div>
+          <div class="cmd-desc">Display the diff and metadata for a specific commit by its hash.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git show &lt;commit-hash&gt;</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Blame</div>
+          <div class="cmd-title">Annotate File</div>
+          <div class="cmd-desc">Show which commit and author last modified each line of a file.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git blame &lt;filename&gt;</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. SHARE & UPDATE -->
+    <section class="section s6" id="share-update">
+      <div class="section-header">
+        <div class="section-icon">🌐</div>
+        <div>
+          <div class="section-title">Share &amp; Update</div>
+          <div class="section-subtitle">Sync with remote repositories and collaborators</div>
+        </div>
+      </div>
+      <div class="commands-grid">
+        <div class="cmd-card">
+          <div class="cmd-label">Remote</div>
+          <div class="cmd-title">Add Remote</div>
+          <div class="cmd-desc">Connect your local repository to a remote server like GitHub.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git remote add origin https://github.com/user/repo.git</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Remote</div>
+          <div class="cmd-title">List Remotes</div>
+          <div class="cmd-desc">Show all remote connections configured for the current repository.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git remote -v</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Push</div>
+          <div class="cmd-title">Push a Branch</div>
+          <div class="cmd-desc">Upload local commits on a branch to the corresponding remote branch.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git push origin &lt;branch-name&gt;</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Push</div>
+          <div class="cmd-title">Push &amp; Set Upstream</div>
+          <div class="cmd-desc">Push the branch and configure it to track the remote branch for future <code>git push/pull</code>.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git push -u origin &lt;branch-name&gt;</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Fetch</div>
+          <div class="cmd-title">Fetch Remote Changes</div>
+          <div class="cmd-desc">Download objects and refs from the remote without merging into your current branch.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git fetch origin</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Pull</div>
+          <div class="cmd-title">Pull Remote Changes</div>
+          <div class="cmd-desc">Fetch and immediately merge remote changes into your current branch.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git pull origin &lt;branch-name&gt;</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Pull</div>
+          <div class="cmd-title">Pull with Rebase</div>
+          <div class="cmd-desc">Pull remote changes but rebase your local commits on top instead of merging — keeps history clean.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git pull --rebase origin &lt;branch-name&gt;</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Delete</div>
+          <div class="cmd-title">Delete Remote Branch</div>
+          <div class="cmd-desc">Remove a branch from the remote repository.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git push origin --delete &lt;branch-name&gt;</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. TRACKING PATH CHANGES -->
+    <section class="section s7" id="tracking-paths">
+      <div class="section-header">
+        <div class="section-icon">📁</div>
+        <div>
+          <div class="section-title">Tracking Path Changes</div>
+          <div class="section-subtitle">Version file moves, renames, and deletions</div>
+        </div>
+      </div>
+      <div class="commands-grid">
+        <div class="cmd-card">
+          <div class="cmd-label">Move</div>
+          <div class="cmd-title">Rename / Move a File</div>
+          <div class="cmd-desc">Move or rename a file and automatically stage the change for the next commit.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git mv &lt;old-path&gt; &lt;new-path&gt;</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Delete</div>
+          <div class="cmd-title">Remove a File</div>
+          <div class="cmd-desc">Delete a file from the working directory and stage its removal for the next commit.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git rm &lt;filename&gt;</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Untrack</div>
+          <div class="cmd-title">Stop Tracking a File</div>
+          <div class="cmd-desc">Remove a file from version control but keep it in your local working directory.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git rm --cached &lt;filename&gt;</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Log</div>
+          <div class="cmd-title">Log File History</div>
+          <div class="cmd-desc">Show the full commit log for a specific file, even across renames.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git log --follow &lt;filename&gt;</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. IGNORING PATTERNS -->
+    <section class="section s8" id="ignoring">
+      <div class="section-header">
+        <div class="section-icon">🚫</div>
+        <div>
+          <div class="section-title">Ignoring Patterns</div>
+          <div class="section-subtitle">Prevent unintended files from being tracked by Git</div>
+        </div>
+      </div>
+      <div class="commands-grid">
+        <div class="info-card">
+          <div class="cmd-title">.gitignore Syntax</div>
+          <div class="cmd-desc">Create a <code>.gitignore</code> file in your repo root. Common patterns:</div>
+          <ul>
+            <li><code>node_modules/</code> — ignore a whole directory</li>
+            <li><code>*.log</code> — ignore all .log files</li>
+            <li><code>.env</code> — ignore a specific file</li>
+            <li><code>!important.log</code> — un-ignore a file</li>
+            <li><code>build/</code> — ignore build output</li>
+            <li><code>**/__pycache__/</code> — ignore in any subdirectory</li>
+          </ul>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Global</div>
+          <div class="cmd-title">Global .gitignore</div>
+          <div class="cmd-desc">Apply a gitignore file across all your repositories on this machine (e.g., OS files, editor configs).</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git config --global core.excludesfile ~/.gitignore_global</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Check</div>
+          <div class="cmd-title">Show Ignored Files</div>
+          <div class="cmd-desc">List all files currently being ignored by Git in the working directory.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git ls-files --others --ignored --exclude-standard</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Debug</div>
+          <div class="cmd-title">Why Is a File Ignored?</div>
+          <div class="cmd-desc">Find which rule in a <code>.gitignore</code> is causing a specific file to be ignored.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git check-ignore -v &lt;filename&gt;</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. REWRITE HISTORY -->
+    <section class="section s9" id="rewrite-history">
+      <div class="section-header">
+        <div class="section-icon">✏️</div>
+        <div>
+          <div class="section-title">Rewrite History</div>
+          <div class="section-subtitle">Amend, rebase, and reset to reshape commit history</div>
+        </div>
+      </div>
+      <div class="commands-grid">
+        <div class="cmd-card">
+          <div class="cmd-label">Amend</div>
+          <div class="cmd-title">Amend Last Commit</div>
+          <div class="cmd-desc">Modify the most recent commit — change its message or add forgotten staged files.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git commit --amend -m "Updated message"</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Rebase</div>
+          <div class="cmd-title">Rebase onto Branch</div>
+          <div class="cmd-desc">Replay your current branch's commits on top of another branch, creating a linear history.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git rebase main</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Rebase</div>
+          <div class="cmd-title">Interactive Rebase</div>
+          <div class="cmd-desc">Interactively squash, reorder, or edit the last N commits. Very powerful for clean PRs.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git rebase -i HEAD~3</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Reset</div>
+          <div class="cmd-title">Soft Reset</div>
+          <div class="cmd-desc">Move HEAD back N commits but keep all changes staged. Useful for re-committing differently.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git reset --soft HEAD~1</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Reset</div>
+          <div class="cmd-title">Mixed Reset (Default)</div>
+          <div class="cmd-desc">Move HEAD back and unstage changes, but keep them in the working directory.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git reset HEAD~1</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Reset</div>
+          <div class="cmd-title">Hard Reset ⚠️</div>
+          <div class="cmd-desc">Discard all commits and changes after the given point. <strong>This is destructive!</strong></div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git reset --hard HEAD~1</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Revert</div>
+          <div class="cmd-title">Revert a Commit</div>
+          <div class="cmd-desc">Create a new commit that undoes the changes from a specific commit — safe for shared branches.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git revert &lt;commit-hash&gt;</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Cherry-pick</div>
+          <div class="cmd-title">Cherry-pick a Commit</div>
+          <div class="cmd-desc">Apply the changes from a specific commit onto the current branch.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git cherry-pick &lt;commit-hash&gt;</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. TEMPORARY COMMITS -->
+    <section class="section s10" id="temp-commits">
+      <div class="section-header">
+        <div class="section-icon">🗄️</div>
+        <div>
+          <div class="section-title">Temporary Commits</div>
+          <div class="section-subtitle">Save and restore work-in-progress without committing</div>
+        </div>
+      </div>
+      <div class="commands-grid">
+        <div class="cmd-card">
+          <div class="cmd-label">Stash</div>
+          <div class="cmd-title">Stash Changes</div>
+          <div class="cmd-desc">Temporarily shelve all uncommitted changes so you can work on something else.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git stash</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Stash</div>
+          <div class="cmd-title">Stash with Message</div>
+          <div class="cmd-desc">Save a stash with a descriptive name to identify it later.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git stash push -m "work in progress"</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Stash</div>
+          <div class="cmd-title">Include Untracked Files</div>
+          <div class="cmd-desc">Stash both tracked changes and new untracked files.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git stash -u</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">List</div>
+          <div class="cmd-title">List Stashes</div>
+          <div class="cmd-desc">Display all saved stashes in the stash stack.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git stash list</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Restore</div>
+          <div class="cmd-title">Apply Latest Stash</div>
+          <div class="cmd-desc">Restore the most recently stashed changes without removing it from the stash stack.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git stash apply</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Restore</div>
+          <div class="cmd-title">Pop Latest Stash</div>
+          <div class="cmd-desc">Apply the most recent stash and remove it from the stash stack.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git stash pop</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Restore</div>
+          <div class="cmd-title">Apply Specific Stash</div>
+          <div class="cmd-desc">Apply a specific stash entry by its index from <code>git stash list</code>.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git stash apply stash@{2}</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Delete</div>
+          <div class="cmd-title">Drop a Stash</div>
+          <div class="cmd-desc">Remove a specific stash entry permanently from the stack.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git stash drop stash@{0}</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-label">Delete</div>
+          <div class="cmd-title">Clear All Stashes</div>
+          <div class="cmd-desc">Remove all stash entries at once. This cannot be undone.</div>
+          <div class="cmd-code-block">
+            <span class="cmd-code">git stash clear</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NO RESULTS -->
+    <div id="noResults">
+      <div class="emoji">🔍</div>
+      <h3>No commands found</h3>
+      <p>Try a different search term.</p>
+    </div>
+
+  </main>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p>Built with ❤️ | Reference: <a href="https://git-scm.com/doc" target="_blank">git-scm.com/doc</a> &amp; <a href="https://docs.github.com" target="_blank">GitHub Docs</a></p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
