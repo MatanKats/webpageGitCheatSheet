@@ -37,6 +37,7 @@
     <nav>
       <div class="sidebar-label">Sections</div>
       <a class="nav-link s0" href="#installation"><span class="nav-dot s0"></span>Installation &amp; GUIs</a>
+      <a class="nav-link s0" href="#beginners-guide"><span class="nav-dot s0"></span>Beginner's Guide</a>
       <a class="nav-link s1" href="#setup"><span class="nav-dot s1"></span>Setup</a>
       <a class="nav-link s2" href="#setup-init"><span class="nav-dot s2"></span>Setup &amp; Init</a>
       <a class="nav-link s3" href="#stage-snapshot"><span class="nav-dot s3"></span>Stage &amp; Snapshot</a>
@@ -91,6 +92,55 @@
           <div class="cmd-code-block">
             <span class="cmd-code">git --version</span>
             <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BEGINNER'S GUIDE -->
+    <section class="section s0" id="beginners-guide">
+      <div class="section-header">
+        <div class="section-icon">🐣</div>
+        <div>
+          <div class="section-title">Beginner's Quick Start</div>
+          <div class="section-subtitle">A simple step-by-step guide to get your first project onto Git and GitHub</div>
+        </div>
+      </div>
+      <div class="commands-grid">
+        <div class="info-card" style="grid-column: 1 / -1;">
+          <div class="cmd-title">1. Install Git</div>
+          <div class="cmd-desc">First, you need to have Git on your machine. Go to the <strong>Installation &amp; GUIs</strong> section above to download it. Git is the engine that tracks changes to your code.</div>
+        </div>
+        <div class="info-card" style="grid-column: 1 / -1;">
+          <div class="cmd-title">2. Add and Commit (What's the difference?)</div>
+          <div class="cmd-desc">
+            Why do we use two commands to save? 
+            <ul>
+              <li><strong>Add (<code>git add .</code>)</strong>: This is the staging area. Think of it like putting items into a shopping cart. You're selecting which changed files you want to include in your next save.</li>
+              <li><strong>Commit (<code>git commit -m "my message"</code>)</strong>: This is like checking out. It permanently takes a "snapshot" of the items in your cart and saves it in your project's history along with a descriptive message.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="info-card" style="grid-column: 1 / -1;">
+          <div class="cmd-title">3. Push for the First Time</div>
+          <div class="cmd-desc">
+            Now that you have a committed snapshot locally, you need to send it to GitHub so others can see it (or to back it up). 
+            For your first push to a new remote repository, run: <br><br>
+            <code>git remote add origin &lt;your-repo-url&gt;</code> <br>
+            <code>git push -u origin main</code> <br><br>
+            This uploads your code and links your local branch to the remote one.
+          </div>
+        </div>
+        <div class="info-card" style="grid-column: 1 / -1;">
+          <div class="cmd-title">4. Next Steps</div>
+          <div class="cmd-desc">
+            To continue your work, simply repeat the cycle:
+            <ul>
+              <li>1. Make changes to your files and save them.</li>
+              <li>2. Run <code>git add .</code> to stage the new changes.</li>
+              <li>3. Run <code>git commit -m "described what I changed"</code> to save the snapshot.</li>
+              <li>4. Run <code>git push</code> to upload your snapshot to the remote repo.</li>
+            </ul>
           </div>
         </div>
       </div>
